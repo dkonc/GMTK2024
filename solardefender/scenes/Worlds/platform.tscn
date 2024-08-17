@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://s3tu26kdyymi"]
+
+[ext_resource type="Script" path="res://scenes/Worlds/movable_platform.gd" id="1_r8fv1"]
+[ext_resource type="Texture2D" uid="uid://cs0r0qlwsyei0" path="res://Pixel Adventure/Other/coin.png" id="2_y2l5f"]
+
+[sub_resource type="Curve2D" id="Curve2D_6nbne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28pqr"]
+size = Vector2(14, 12.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glrok"]
+atlas = ExtResource("2_y2l5f")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q4k60"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glrok")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Platform" type="Path2D"]
+curve = SubResource("Curve2D_6nbne")
+script = ExtResource("1_r8fv1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_28pqr")
+one_way_collision = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+sprite_frames = SubResource("SpriteFrames_q4k60")
+autoplay = "default"
+
+[node name="Line2D" type="Line2D" parent="."]
+default_color = Color(1, 1, 1, 0.317647)

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8uh6xhudb655"]
+
+[ext_resource type="PackedScene" uid="uid://s3tu26kdyymi" path="res://scenes/Worlds/platform.tscn" id="1_rq3f8"]
+[ext_resource type="Texture2D" uid="uid://bpuh6k5dclna" path="res://Pixel Adventure/Sprite-0001.png" id="2_g5g4u"]
+
+[sub_resource type="Curve2D" id="Curve2D_78glk"]
+_data = {
+"points": PackedVector2Array(0.749154, 100.387, 0, -100, -100, 0, 0, 0, 100, 0, 0, -100, 0, 0, 0, 100, 100, 0, 0, 0, -100, 0, 0, 100, 0, 0, 0, 0, -100, 0)
+}
+point_count = 5
+
+[node name="SolarSystem" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sun" type="Sprite2D" parent="."]
+texture = ExtResource("2_g5g4u")
+
+[node name="World1" parent="." instance=ExtResource("1_rq3f8")]
+curve = SubResource("Curve2D_78glk")
+speed = 50.0
+
+[node name="World2" parent="." instance=ExtResource("1_rq3f8")]
+scale = Vector2(1.5, 1.5)
+curve = SubResource("Curve2D_78glk")
+speed = 150.0
+
+[node name="World3" parent="." instance=ExtResource("1_rq3f8")]
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_78glk")

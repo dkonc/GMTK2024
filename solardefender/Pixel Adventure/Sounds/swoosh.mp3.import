@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://btbyn1c6utim0"
+path="res://.godot/imported/swoosh.mp3-68c3e36eefbd2f530655512f54159ca8.mp3str"
+
+[deps]
+
+source_file="res://Pixel Adventure/Sounds/swoosh.mp3"
+dest_files=["res://.godot/imported/swoosh.mp3-68c3e36eefbd2f530655512f54159ca8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
