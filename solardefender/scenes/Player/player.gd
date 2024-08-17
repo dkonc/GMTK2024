@@ -20,7 +20,6 @@ func _ready() -> void:
 	line_to_screen.add_point((get_global_mouse_position() + (get_global_mouse_position() - player.global_position)*10))
 
 func _process(_delta: float) -> void:
-	
 	if(Input.is_action_just_pressed("switch_in")):
 		GameManager.switchWorldUp()
 	if(Input.is_action_just_pressed("switch_out")):

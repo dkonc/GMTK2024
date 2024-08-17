@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8uh6xhudb655"]
+
+[ext_resource type="Script" path="res://scenes/solar_system.gd" id="1_pte2r"]
+[ext_resource type="PackedScene" uid="uid://s3tu26kdyymi" path="res://scenes/Worlds/platform.tscn" id="1_rq3f8"]
+[ext_resource type="Texture2D" uid="uid://bpuh6k5dclna" path="res://Pixel Adventure/Sprite-0001.png" id="2_g5g4u"]
+[ext_resource type="PackedScene" uid="uid://decxuhfuennuj" path="res://scenes/Player/player.tscn" id="4_wfl2b"]
+
+[sub_resource type="Curve2D" id="Curve2D_78glk"]
+_data = {
+"points": PackedVector2Array(0.749154, 100.387, 0, -100, -100, 0, 0, 0, 100, 0, 0, -100, 0, 0, 0, 100, 100, 0, 0, 0, -100, 0, 0, 100, 0, 0, 0, 0, -100, 0)
+}
+point_count = 5
+
+[node name="SolarSystem" type="Node2D" node_paths=PackedStringArray("planets", "scales")]
+script = ExtResource("1_pte2r")
+planets = [NodePath("World1/AnimatableBody2D"), NodePath("World2/AnimatableBody2D"), NodePath("World3/AnimatableBody2D")]
+scales = [NodePath("World1"), NodePath("World2"), NodePath("World3")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sun" type="Sprite2D" parent="."]
+texture = ExtResource("2_g5g4u")
+
+[node name="World1" parent="." instance=ExtResource("1_rq3f8")]
+curve = SubResource("Curve2D_78glk")
+speed = 50.0
+
+[node name="PathFollow2D" parent="World1" index="0"]
+position = Vector2(-100, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+
+[node name="AnimatableBody2D" parent="World1" index="1"]
+position = Vector2(-100, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+collision_layer = 0
+
+[node name="World2" parent="." instance=ExtResource("1_rq3f8")]
+scale = Vector2(1.5, 1.5)
+curve = SubResource("Curve2D_78glk")
+speed = 150.0
+
+[node name="PathFollow2D" parent="World2" index="0"]
+position = Vector2(-100, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+
+[node name="AnimatableBody2D" parent="World2" index="1"]
+position = Vector2(-100, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+collision_layer = 0
+
+[node name="World3" parent="." instance=ExtResource("1_rq3f8")]
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_78glk")
+
+[node name="PathFollow2D" parent="World3" index="0"]
+position = Vector2(-100, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+
+[node name="AnimatableBody2D" parent="World3" index="1"]
+position = Vector2(-100, 0)
+rotation = -1.5708
+scale = Vector2(0.2, 0.2)
+collision_layer = 0
+
+[node name="Player" parent="." instance=ExtResource("4_wfl2b")]
+
+[node name="LineToCursor" type="Line2D" parent="."]
+default_color = Color(0, 0.798197, 0.512625, 1)
+antialiased = true
+
+[node name="LineToScreen" type="Line2D" parent="."]
+antialiased = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="World1"]
+[editable path="World2"]
+[editable path="World3"]

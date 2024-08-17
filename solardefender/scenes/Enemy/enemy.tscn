@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1ltaspwanrgv"]
+
+[ext_resource type="Script" path="res://scenes/Enemy/enemy.gd" id="1_c0yb2"]
+[ext_resource type="Texture2D" uid="uid://dcnvjdca1peo0" path="res://Pixel Adventure/Traps/Spike Head/Idle.png" id="1_jpf6n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7mex"]
+size = Vector2(41, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehdcr"]
+atlas = ExtResource("1_jpf6n")
+region = Rect2(0, 0, 54, 52)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hlrp5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehdcr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_c0yb2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_l7mex")
+
+[node name="Enemy" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+sprite_frames = SubResource("SpriteFrames_hlrp5")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_l7mex")
+
+[node name="Marker2D" type="Marker2D" parent="Enemy"]

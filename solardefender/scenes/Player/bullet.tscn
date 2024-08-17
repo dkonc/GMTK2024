@@ -60,8 +60,8 @@ _data = {
 
 [node name="Bullet" type="Area2D"]
 z_index = 40
-collision_layer = 512
-collision_mask = 513
+collision_layer = 515
+collision_mask = 515
 script = ExtResource("1_xd1ga")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -76,3 +76,5 @@ libraries = {
 "": SubResource("AnimationLibrary_cxkuy")
 }
 autoplay = "idle"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

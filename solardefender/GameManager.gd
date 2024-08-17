@@ -1,10 +1,17 @@
 extends Node
 
+var lives: int = 4
+
 var score: int = 0
 var currentActiveWorld: int = 0
 
 var BULLET_SPEED: float = 200.0
-var time_between_shots: float = 0.1
+var time_between_shots: float = 0.9
+var bullet_lifespan: float = 1.3
+
+var enemy_speed_min: float = 50
+var enemy_speed_max: float = 100
+var enemy_spawn_time: float = 3.5
 
 func add_points(added_score: int) -> void:
 	score = score + added_score
@@ -16,7 +23,7 @@ func get_points() -> String:
 	return str(score)
 
 func switchWorldUp() -> void:
-	if currentActiveWorld < 2:
+	if currentActiveWorld < 3:
 		currentActiveWorld += 1
 	
 func switchWorldDown() -> void:
