@@ -11,10 +11,9 @@ _data = {
 }
 point_count = 5
 
-[node name="SolarSystem" type="Node2D" node_paths=PackedStringArray("planets", "scales")]
+[node name="SolarSystem" type="Node2D" node_paths=PackedStringArray("planets")]
 script = ExtResource("1_pte2r")
 planets = [NodePath("World1/AnimatableBody2D"), NodePath("World2/AnimatableBody2D"), NodePath("World3/AnimatableBody2D")]
-scales = [NodePath("World1"), NodePath("World2"), NodePath("World3")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -59,13 +58,6 @@ position = Vector2(-100, 0)
 rotation = -1.5708
 
 [node name="Player" parent="." instance=ExtResource("4_wfl2b")]
-
-[node name="LineToCursor" type="Line2D" parent="."]
-default_color = Color(0, 0.798197, 0.512625, 1)
-antialiased = true
-
-[node name="LineToScreen" type="Line2D" parent="."]
-antialiased = true
 
 [editable path="World1"]
 [editable path="World2"]

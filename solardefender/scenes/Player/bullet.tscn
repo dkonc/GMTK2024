@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhk3oysyiumjv"]
+
+[ext_resource type="Script" path="res://scenes/Player/bullet.gd" id="1_xd1ga"]
+[ext_resource type="Texture2D" uid="uid://xei6km3cg2th" path="res://Pixel Adventure/Traps/Spiked Ball/Spiked Ball.png" id="2_vwti2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2fqm"]
+atlas = ExtResource("2_vwti2")
+region = Rect2(0, 0, 28, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ww1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2fqm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qo5gq"]
+radius = 12.5
+
+[sub_resource type="Animation" id="Animation_bbxc5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ytjuc"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxkuy"]
+_data = {
+"RESET": SubResource("Animation_bbxc5"),
+"idle": SubResource("Animation_ytjuc")
+}
+
+[node name="Bullet" type="Area2D"]
+z_index = 40
+collision_layer = 512
+collision_mask = 513
+script = ExtResource("1_xd1ga")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6ww1f")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qo5gq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cxkuy")
+}
+autoplay = "idle"

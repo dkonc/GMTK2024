@@ -60,12 +60,8 @@ rotation = -1.5708
 
 [node name="Player" parent="." instance=ExtResource("4_wfl2b")]
 
-[node name="LineToCursor" type="Line2D" parent="."]
-default_color = Color(0, 0.798197, 0.512625, 1)
-antialiased = true
-
-[node name="LineToScreen" type="Line2D" parent="."]
-antialiased = true
+[node name="Line2D" type="Line2D" parent="."]
+end_cap_mode = 1
 
 [editable path="World1"]
 [editable path="World2"]

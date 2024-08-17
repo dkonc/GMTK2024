@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=3 uid="uid://decxuhfuennuj"]
+
+[ext_resource type="Texture2D" uid="uid://ux41ulmatr4o" path="res://Pixel Adventure/Main Characters/Virtual Guy/Idle (32x32).png" id="1_l64ax"]
+[ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_sliq1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vl5eu"]
+size = Vector2(21, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgd0c"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4q2h"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wayrv"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_147vd"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bfit"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsv5f"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v03mp"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68kub"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3vev"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th12q"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3pi4"]
+atlas = ExtResource("1_l64ax")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1dsom"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgd0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4q2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wayrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_147vd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bfit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsv5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v03mp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68kub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3vev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th12q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3pi4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_sliq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4.5)
+shape = SubResource("RectangleShape2D_vl5eu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1dsom")
+autoplay = "default"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+gizmo_extents = 100.1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
