@@ -21,8 +21,10 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("switch_in")):
+		SoundManager.play_teleport()
 		GameManager.switchWorldUp()
 	if(Input.is_action_just_pressed("switch_out")):
+		SoundManager.play_teleport()
 		GameManager.switchWorldDown()
 	if(Input.is_action_just_pressed("shoot")):
 		shoot()
