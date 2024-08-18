@@ -23,6 +23,12 @@ const ENEMY_NODE = preload("res://scenes/Enemy/enemy.tscn")
 
 var enemiesShouldSpawn: bool = false
 
+@export var drag_speed := 1.0  # Adjust the speed of the drag
+
+var dragging := false
+var last_mouse_position : Vector2
+
+
 func _ready() -> void:
 	timer.wait_time = GameManager.enemy_spawn_time
 	camera_2d.zoom = Vector2(0.6,0.6)
@@ -45,9 +51,23 @@ func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("zoom_out")):
 		if(camera_2d.zoom.x) > 0.6:
 			camera_2d.zoom /= 1.1
-		
+			
+func _unhandled_input(event: InputEvent) -> void:			
+	if Input.is_action_just_pressed("pan"):
+		dragging = true
+		last_mouse_position = get_viewport().get_mouse_position()
 
-
+	# Stop dragging when the "pan" action is just released
+	if Input.is_action_just_released("pan"):
+		dragging = false
+	# If dragging, move the camera
+	if event is InputEventMouseMotion and dragging:
+		var mouse_position = get_viewport().get_mouse_position()
+		var mouse_delta = mouse_position - last_mouse_position
+		last_mouse_position = mouse_position
+		# Move the camera based on mouse delta
+		camera_2d.global_position -= mouse_delta * drag_speed
+	
 func _on_timer_timeout() -> void:
 	spawnEnemy()
 
@@ -76,18 +96,18 @@ func get_random_position_on_camera_edge() -> Vector2:
 	var edge = randi() % 4
 	
 	match edge:
-		0:  # Left ed			
-			position.x = visible_rect_top_left.x
-			position.y = randf_range(visible_rect_top_left.y, visible_rect_bottom_right.y)
+		0:  # Left edge
+			position.x = visible_rect_top_left.x - 500
+			position.y = randf_range(visible_rect_top_left.y, visible_rect_bottom_right.y) 
 		1:  # Right edge
-			position.x = visible_rect_bottom_right.x
+			position.x = visible_rect_bottom_right.x + 500
 			position.y = randf_range(visible_rect_top_left.y, visible_rect_bottom_right.y)
 		2:  # Top edge
 			position.x = randf_range(visible_rect_top_left.x, visible_rect_bottom_right.x)
-			position.y = visible_rect_top_left.y
+			position.y = visible_rect_top_left.y - 500
 		3:  # Bottom edge
 			position.x = randf_range(visible_rect_top_left.x, visible_rect_bottom_right.x)
-			position.y = visible_rect_bottom_right.y
+			position.y = visible_rect_bottom_right.y + 500
 	return position	
 	
 func triggerUpgrade() -> void:
@@ -105,7 +125,7 @@ func _on_add_life_pressed() -> void:
 func _on_add_bullet_speed_pressed() -> void:
 	get_tree().paused = false
 	upgrade.hide()
-	GameManager.BULLET_SPEED += 20
+	GameManager.BULLET_SPEED += 50
 	GameManager.add_points(5)
 
 
@@ -113,7 +133,7 @@ func _on_add_bullet_speed_pressed() -> void:
 func _on_increase_fire_rate_pressed() -> void:
 	get_tree().paused = false
 	upgrade.hide()
-	GameManager.time_between_shots -= 0.05
+	GameManager.time_between_shots -= 0.15
 	GameManager.add_points(5)
 
 	

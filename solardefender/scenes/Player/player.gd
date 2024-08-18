@@ -37,14 +37,42 @@ func shoot() -> void:
 		return
 	can_shoot = false
 	timer.start(GameManager.time_between_shots)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	var bullet = BULLET_NODE.instantiate()
 	bullet.global_position = marker_2d.global_position
 	bullet.set_direction(set_bullet_direction())
 	get_parent().add_child(bullet)
 
 func set_bullet_direction() -> Vector2:
-	#Vector length impacts speed...So it has to be normalized
-	return (get_global_mouse_position() - player.global_position).normalized()
+	var koncna_pozicija = get_global_mouse_position()
+	var pozicija_clovecka = player.global_position
+	return (koncna_pozicija-pozicija_clovecka).normalized()
+	
+	
+	
+	
+	
+	
+	
+	
 
 func _on_timer_timeout() -> void:
 	can_shoot = true
