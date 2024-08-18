@@ -10,7 +10,7 @@ var bullet_lifespan: float = 1.5
 
 var enemy_speed_min: float = 20
 var enemy_speed_max: float = 50
-var enemy_spawn_time: float = 5
+var enemy_spawn_time: float = 4
 
 func add_points(added_score: int) -> void:
 	score = score + added_score

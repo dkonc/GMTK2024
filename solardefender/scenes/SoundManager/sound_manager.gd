@@ -4,7 +4,6 @@ extends Node2D
 @onready var background: AudioStreamPlayer2D = $Background
 @onready var teleport: AudioStreamPlayer2D = $Teleport
 
-
 func play_explosion()-> void:
 	explosion.play()
 	

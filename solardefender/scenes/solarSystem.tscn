@@ -292,6 +292,54 @@ theme_override_font_sizes/font_size = 72
 text = "YOU LOST!
 (click to retry)"
 
+[node name="Instructions" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Instructions"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_s8q67")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Instructions"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Instructions/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "HOW TO PLAY:
+
+Right click to shoot
+Wheel to zoom and pan
+Q/E to hop planets
+Upgrade as you destroy
+Do not lose all lives
+"
+horizontal_alignment = 1
+
+[node name="LetsGo" type="Button" parent="Instructions/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "LETS GO"
+
 [connection signal="pressed" from="Camera2D/MuteButton/Mute" to="." method="_on_mute_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Upgrade/HBoxContainer/VBoxContainer/AddLife" to="." method="_on_add_life_pressed"]
@@ -305,6 +353,7 @@ text = "YOU LOST!
 [connection signal="pressed" from="Upgrade/HBoxContainer/VBoxContainer3/NothingHappens" to="." method="_on_nothing_happens_pressed"]
 [connection signal="pressed" from="WIN/WinButton" to="." method="_on_win_button_pressed"]
 [connection signal="pressed" from="LOSE/GameOver" to="." method="_on_game_over_pressed"]
+[connection signal="pressed" from="Instructions/VBoxContainer/LetsGo" to="." method="_on_lets_go_pressed"]
 
 [editable path="World1"]
 [editable path="World2"]

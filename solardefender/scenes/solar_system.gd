@@ -21,6 +21,7 @@ const ENEMY_NODE = preload("res://scenes/Enemy/enemy.tscn")
 @onready var win_button: Button = $WIN/WinButton
 @onready var win: CanvasLayer = $WIN
 @onready var lose: CanvasLayer = $LOSE
+@onready var instructions: CanvasLayer = $Instructions
 
 var enemiesShouldSpawn: bool = false
 
@@ -33,6 +34,9 @@ var last_mouse_position : Vector2
 func _ready() -> void:
 	timer.wait_time = GameManager.enemy_spawn_time
 	camera_2d.zoom = Vector2(0.6,0.6)
+	instructions.show()
+	get_tree().paused = true
+	
 	
 func _process(_delta: float) -> void:
 	label_lives.text = str(GameManager.lives)
@@ -50,7 +54,7 @@ func _process(_delta: float) -> void:
 		if(camera_2d.zoom.x) < 1.7:
 			camera_2d.zoom /= 0.9
 	if(Input.is_action_just_pressed("zoom_out")):
-		if(camera_2d.zoom.x) > 0.6:
+		if(camera_2d.zoom.x) > 0.3:
 			camera_2d.zoom /= 1.1
 			
 func _unhandled_input(event: InputEvent) -> void:			
@@ -72,7 +76,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_timer_timeout() -> void:
 	spawnEnemy()
 	#Z vsakim spawnom se hitreje spawnajo
-	GameManager.enemy_spawn_time *= 0.99
+	if GameManager.enemy_spawn_time > 0.2:
+		GameManager.enemy_spawn_time *= 0.99
 	timer.wait_time = GameManager.enemy_spawn_time
 
 func spawnEnemy() -> void:
@@ -203,3 +208,8 @@ func _on_mute_pressed() -> void:
 		AudioServer.set_bus_mute(0,false)
 	else:
 		AudioServer.set_bus_mute(0,true)
+
+
+func _on_lets_go_pressed() -> void:
+	instructions.hide()
+	get_tree().paused = false
