@@ -12,8 +12,8 @@ var can_shoot: bool = true
 func _ready() -> void:
 	line_to_cursor.default_color = Color(0, 0.798, 0.513)
 	line_to_screen.default_color = Color(1, 1, 1, 1)
-	line_to_cursor.width = 5
-	line_to_screen.width = 5
+	line_to_cursor.width = 8
+	line_to_screen.width = 8
 	line_to_cursor.add_point(player.global_position)
 	line_to_screen.add_point(get_global_mouse_position())
 	line_to_cursor.add_point(get_global_mouse_position())
