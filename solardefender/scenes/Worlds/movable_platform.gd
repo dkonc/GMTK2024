@@ -18,6 +18,5 @@ func _process(delta) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("enemy")):
-		print("COLLIDING")
 		body.queue_free()
 		GameManager.lives -= 1

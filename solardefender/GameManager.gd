@@ -1,5 +1,4 @@
 extends Node
-
 var lives: int = 4
 
 var score: int = 0
@@ -29,7 +28,7 @@ func switchWorldUp() -> void:
 func switchWorldDown() -> void:
 	if currentActiveWorld > 0:
 		currentActiveWorld -= 1
-		
+
 func resetGameStats() -> void:
 	lives = 4
 	score = 0

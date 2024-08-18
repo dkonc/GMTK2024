@@ -36,6 +36,7 @@ func shoot() -> void:
 	if !can_shoot:
 		return
 	can_shoot = false
+	SoundManager.play_shooting()
 	timer.start(GameManager.time_between_shots)
 	var bullet = BULLET_NODE.instantiate()
 	bullet.global_position = marker_2d.global_position

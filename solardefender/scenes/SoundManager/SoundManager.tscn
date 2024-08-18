@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cer5w4oawieks"]
+
+[ext_resource type="AudioStream" uid="uid://detnu1bohs5he" path="res://Pixel Adventure/Sounds/explosion.wav" id="1_dq0oy"]
+[ext_resource type="Script" path="res://scenes/SoundManager/sound_manager.gd" id="1_h1v4k"]
+[ext_resource type="AudioStream" uid="uid://bfrtyji12mama" path="res://Pixel Adventure/Sounds/laserShoot.wav" id="2_aybkx"]
+
+[node name="SoundManager" type="Node2D"]
+script = ExtResource("1_h1v4k")
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_dq0oy")
+volume_db = -5.943
+
+[node name="Shooting" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_aybkx")

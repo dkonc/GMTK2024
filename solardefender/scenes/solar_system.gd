@@ -74,7 +74,6 @@ func _on_timer_timeout() -> void:
 	#Z vsakim spawnom se hitreje spawnajo
 	GameManager.enemy_spawn_time *= 0.99
 	timer.wait_time = GameManager.enemy_spawn_time
-	print(timer.time_left)
 
 func spawnEnemy() -> void:
 	var enemy = ENEMY_NODE.instantiate()
