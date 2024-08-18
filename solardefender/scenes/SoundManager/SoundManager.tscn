@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cer5w4oawieks"]
+[gd_scene load_steps=5 format=3 uid="uid://cer5w4oawieks"]
 
 [ext_resource type="AudioStream" uid="uid://detnu1bohs5he" path="res://Pixel Adventure/Sounds/explosion.wav" id="1_dq0oy"]
 [ext_resource type="Script" path="res://scenes/SoundManager/sound_manager.gd" id="1_h1v4k"]
 [ext_resource type="AudioStream" uid="uid://bfrtyji12mama" path="res://Pixel Adventure/Sounds/laserShoot.wav" id="2_aybkx"]
+[ext_resource type="AudioStream" uid="uid://b15ejq4qhw68i" path="res://Pixel Adventure/Sounds/Blackmill - Stillness ( 1st Draft - Melodic Dubstep).mp3" id="4_ucb24"]
 
 [node name="SoundManager" type="Node2D"]
 script = ExtResource("1_h1v4k")
@@ -13,3 +14,9 @@ volume_db = -5.943
 
 [node name="Shooting" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_aybkx")
+
+[node name="Background" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ucb24")
+volume_db = -24.0
+autoplay = true
+parameters/looping = true

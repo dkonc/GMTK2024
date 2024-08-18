@@ -196,3 +196,10 @@ func _on_game_over_pressed() -> void:
 	for node in get_tree().get_nodes_in_group("enemy"):
 		node.free()
 	get_tree().reload_current_scene()
+
+
+func _on_mute_pressed() -> void:
+	if(AudioServer.is_bus_mute(0)):		
+		AudioServer.set_bus_mute(0,false)
+	else:
+		AudioServer.set_bus_mute(0,true)

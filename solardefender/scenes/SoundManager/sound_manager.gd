@@ -1,6 +1,7 @@
 extends Node2D
 @onready var explosion: AudioStreamPlayer2D = $Explosion
 @onready var shooting: AudioStreamPlayer2D = $Shooting
+@onready var background: AudioStreamPlayer2D = $Background
 
 
 func play_explosion()-> void:
