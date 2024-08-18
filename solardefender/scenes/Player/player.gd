@@ -12,8 +12,8 @@ var can_shoot: bool = true
 func _ready() -> void:
 	line_to_cursor.default_color = Color(0, 0.798, 0.513)
 	line_to_screen.default_color = Color(1, 1, 1, 1)
-	line_to_cursor.width = 2
-	line_to_screen.width = 2
+	line_to_cursor.width = 5
+	line_to_screen.width = 5
 	line_to_cursor.add_point(player.global_position)
 	line_to_screen.add_point(get_global_mouse_position())
 	line_to_cursor.add_point(get_global_mouse_position())
@@ -37,25 +37,6 @@ func shoot() -> void:
 		return
 	can_shoot = false
 	timer.start(GameManager.time_between_shots)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	var bullet = BULLET_NODE.instantiate()
 	bullet.global_position = marker_2d.global_position
 	bullet.set_direction(set_bullet_direction())
@@ -65,14 +46,6 @@ func set_bullet_direction() -> Vector2:
 	var koncna_pozicija = get_global_mouse_position()
 	var pozicija_clovecka = player.global_position
 	return (koncna_pozicija-pozicija_clovecka).normalized()
-	
-	
-	
-	
-	
-	
-	
-	
 
 func _on_timer_timeout() -> void:
 	can_shoot = true

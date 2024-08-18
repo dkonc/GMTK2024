@@ -20,6 +20,7 @@ const ENEMY_NODE = preload("res://scenes/Enemy/enemy.tscn")
 @onready var nothing_happens: Button = $Upgrade/HBoxContainer/VBoxContainer3/NothingHappens
 @onready var win_button: Button = $WIN/WinButton
 @onready var win: CanvasLayer = $WIN
+@onready var lose: CanvasLayer = $LOSE
 
 var enemiesShouldSpawn: bool = false
 
@@ -36,9 +37,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	label_lives.text = str(GameManager.lives)
 	label_score.text = str(GameManager.score)
-	if(GameManager.lives==0):
-		OS.kill(OS.get_process_id())
-		
+	if(GameManager.lives<=0):
+		get_tree().paused = true
+		lose.show()
 	if(GameManager.score % 50 == 5):
 		triggerUpgrade()
 	player.position = planets[GameManager.currentActiveWorld].position
@@ -70,6 +71,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func _on_timer_timeout() -> void:
 	spawnEnemy()
+	#Z vsakim spawnom se hitreje spawnajo
+	GameManager.enemy_spawn_time *= 0.99
+	timer.wait_time = GameManager.enemy_spawn_time
+	print(timer.time_left)
 
 func spawnEnemy() -> void:
 	var enemy = ENEMY_NODE.instantiate()
@@ -184,3 +189,11 @@ func _on_gamble_for_win_pressed() -> void:
 
 func _on_win_button_pressed() -> void:
 	OS.kill(OS.get_process_id())
+
+
+func _on_game_over_pressed() -> void:
+	get_tree().paused = false
+	GameManager.resetGameStats()
+	for node in get_tree().get_nodes_in_group("enemy"):
+		node.free()
+	get_tree().reload_current_scene()

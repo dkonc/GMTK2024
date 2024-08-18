@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8uh6xhudb655"]
+[gd_scene load_steps=7 format=3 uid="uid://b8uh6xhudb655"]
 
 [ext_resource type="Script" path="res://scenes/solar_system.gd" id="1_pte2r"]
 [ext_resource type="PackedScene" uid="uid://s3tu26kdyymi" path="res://scenes/Worlds/platform.tscn" id="1_rq3f8"]
 [ext_resource type="Texture2D" uid="uid://bpuh6k5dclna" path="res://Pixel Adventure/Sprite-0001.png" id="2_g5g4u"]
+[ext_resource type="Texture2D" uid="uid://4mmb88ycx7sh" path="res://Pixel Adventure/BG.png" id="2_s8q67"]
 [ext_resource type="PackedScene" uid="uid://decxuhfuennuj" path="res://scenes/Player/player.tscn" id="4_wfl2b"]
 
 [sub_resource type="Curve2D" id="Curve2D_78glk"]
@@ -19,11 +20,16 @@ scales = [NodePath("World1"), NodePath("World2"), NodePath("World3"), NodePath("
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.8, 0.8)
 
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+scale = Vector2(100, 100)
+texture = ExtResource("2_s8q67")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -252,6 +258,26 @@ theme_override_font_sizes/font_size = 72
 text = "YOU WON!
 (click to EXIT)"
 
+[node name="LOSE" type="CanvasLayer" parent="."]
+process_mode = 2
+visible = false
+
+[node name="GameOver" type="Button" parent="LOSE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -232.0
+offset_top = -103.0
+offset_right = 232.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "YOU LOST!
+(click to retry)"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Upgrade/HBoxContainer/VBoxContainer/AddLife" to="." method="_on_add_life_pressed"]
 [connection signal="pressed" from="Upgrade/HBoxContainer/VBoxContainer/AddBulletSpeed" to="." method="_on_add_bullet_speed_pressed"]
@@ -263,6 +289,7 @@ text = "YOU WON!
 [connection signal="pressed" from="Upgrade/HBoxContainer/VBoxContainer3/GambleForWin" to="." method="_on_gamble_for_win_pressed"]
 [connection signal="pressed" from="Upgrade/HBoxContainer/VBoxContainer3/NothingHappens" to="." method="_on_nothing_happens_pressed"]
 [connection signal="pressed" from="WIN/WinButton" to="." method="_on_win_button_pressed"]
+[connection signal="pressed" from="LOSE/GameOver" to="." method="_on_game_over_pressed"]
 
 [editable path="World1"]
 [editable path="World2"]
